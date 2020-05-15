@@ -102,9 +102,12 @@ public class Controlador {
       ot.print("<div class='navbar navbar-fixed-top'><div class='navbar-inner' style='height: auto;'>"
       + "<div class='container'><a class='btn btn-navbar' data-toggle='collapse' data-target="
       + "'.nav-collapse'><span class='icon-bar'></span><span class='icon-bar'></span><span class"
-      + "='icon-bar'></span></a><a class='brand' href='MenuPrincipal.jsp' style='padding: 0px;'>"
-      + "<img src='Imagenes/Computer.png' alt='Computadora' style='width: 32px;'> Sistema de Ventas"
-      + "</a><br><div class='nav-collapse'><ul class='nav pull-right'><li class='dropdown'>"
+      + "='icon-bar'></span></a>"
+      + "<a class='brand' href='MenuPrincipal.jsp' style='padding: 0px;'>"
+        + "<img src='Imagenes/Computer.png' alt='Computadora' style='width: 32px;'> Sistema de Ventas"
+      + "</a><br>"
+      + "<div class='nav-collapse'>"
+              + "<ul class='nav pull-right'><li class='dropdown'>"
       + "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><img src='Imagenes/user_add.png'>"
       + "Usuario: "+Controlador.dateando+"<b class='caret'></b></a><ul class='dropdown-menu'><li><a "
       + "href='Miperfil.jsp'>Perfil</a></li><li><a href='#' onclick='window.parent.close();'>Cerrando"
@@ -128,7 +131,7 @@ public class Controlador {
         + "<span>Inicio</span></a></li><li class='dropdown active'><a href='javascript:;'target"
         + "='_blank' class='dropdown-toggle' data-toggle='dropdown'><br><img src='Imagenes/Box.png'>"
         + "<span>Tablas Base</span></a><ul class='dropdown-menu' style='background-color: #a6e1ec'>"
-        + "<li style='color: red'><a href='Marcas.jsp'> Marcas</a></li><li><a href='Tipo.jsp'>Tipo "
+        + "<li style='color: red'><a href='Marcas.jsp'> Marcas</a></li><li><a href='TipoProductos.jsp'>Tipo "
         + "Producto</a></li><li><a href='Productos.jsp'>Producto</a></li></ul></li>"
         
         +"<li class='dropdown active'><a href='javascript:;'target"
@@ -141,7 +144,7 @@ public class Controlador {
         + "data-toggle='dropdown'><br><img src='Imagenes/Print.png'><span>Los Reportes</span>"
         + "</a><ul class='dropdown-menu' style='background-color: #a6e1ec'><li style='color: "
         + "red'><a href='ReporMarcas.jsp' target=_blank> Reporte de Marcas</a></li><li><a href='#'>Reporte"
-        + " Tipo Producto</a></li><li><a href='#'>Reporte Producto</a></li></ul></li>"
+        + " Tipo Producto</a></li><li><a href='ReporProductos.jsp' target=_blank>Reporte Producto</a></li></ul></li>"
       + "</ul>"
      + "</div></div></div>");
    }

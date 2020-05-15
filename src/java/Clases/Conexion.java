@@ -13,7 +13,7 @@ public class Conexion {
   //static String bd="bdempleados";static String login="root";
     static String bd="basejsp";static String login="root";
     
-  static String password="";static String url="jdbc:mysql://localhost/"+bd;
+  static String password="1234";static String url="jdbc:mysql://localhost/"+bd;
   static public Connection cnx=null;static public Statement st=null;static public ResultSet rs=null; 
    //public Connection cnxr=null;
   //******************************ATRIBUTOS*************************************

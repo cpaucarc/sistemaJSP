@@ -3,11 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Misistema/src/java/Clases/Conexion.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Misistema/web/Acceso.jsp</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Misistema/web/Procesador.jsp</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Misistema/web/MenuPrincipal.jsp</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Misistema/src/java/Clases/Controlador.java</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/src/java/Clases/Marca.java</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/src/java/Clases/Conexion.java</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/web/Marcas.jsp</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/web/ReporMarcas.jsp</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/web/MenuPrincipal.jsp</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/web/Procesador2.jsp</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/src/java/Clases/Tipo.java</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/web/ReporProductos.jsp</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/web/TipoProductos.jsp</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/web/Procesador.jsp</file>
+            <file>file:/C:/Users/PAUCAR/Documents/NetBeansProjects/Misistema/src/java/Clases/Controlador.java</file>
         </group>
     </open-files>
 </project-private>

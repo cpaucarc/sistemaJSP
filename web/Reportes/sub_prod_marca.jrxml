@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_prod_marca" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2963550c-6952-416a-87d4-d997e9f310aa">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="_marca" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+
+concat_ws(' ', tp.tippro, p.nomprod) producto,
+m.nommrc marca,
+p.prec precio,
+p.stkmin min,
+p.stkmax max
+
+from producto p
+join marca m on m.idmarca = p.idmarca
+join tipoproducto tp on tp.idtipoproducto = p.idtipoproducto
+where m.nommrc = $P{_marca};]]>
+	</queryString>
+	<field name="producto" class="java.lang.String"/>
+	<field name="marca" class="java.lang.String"/>
+	<field name="precio" class="java.math.BigDecimal"/>
+	<field name="min" class="java.lang.Long"/>
+	<field name="max" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="60">
+			<staticText>
+				<reportElement x="20" y="0" width="40" height="20" forecolor="#999999" uuid="e0df761d-5feb-42ec-b9fe-adf21c6d45cd"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="0" width="100" height="20" forecolor="#333333" uuid="57d96442-70b9-4c6e-af9d-c620d09f12cc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="40" width="255" height="20" forecolor="#999999" uuid="423efc56-3154-4aa7-b046-c6423d0a21e3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="40" width="75" height="20" forecolor="#999999" uuid="821d1396-c9ac-4aa9-aa3c-064a379cd629"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="40" width="75" height="20" forecolor="#999999" uuid="069cba77-2156-496d-a380-d579f1eee316"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stock Minimo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="40" width="75" height="20" forecolor="#999999" uuid="fa8f3761-14eb-4630-ac2b-9038333a4b26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stock Maximo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="0" width="255" height="25" forecolor="#333333" uuid="f4140008-3b5d-41e5-beb8-bf9c4612add4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="0" width="51" height="25" forecolor="#333333" uuid="50e5fe11-76ff-40c7-98ee-6fc655e8136e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="45" height="25" forecolor="#333333" uuid="1f6e30cd-926c-4535-a7aa-33b94e6517bf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{min}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="0" width="45" height="25" forecolor="#333333" uuid="2d203e92-5243-4b46-86ea-30a243f05665"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{max}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
