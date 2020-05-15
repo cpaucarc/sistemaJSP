@@ -42,8 +42,8 @@
                         + "<td style='text-align:center; font-size:14px;'>" + control.Base.rs.getString(2)+"</td>"
                         + "<td class='td-actions'><a href='javascript:;' class='btn btn-small' "
                         + " onclick='editU(" + control.Base.rs.getString(1) + ")'> <img src='Imagenes/Edit.png' "
-                        + "width='18px'></a><a href='javascript:;' class='btn btn-danger btn-small' onclick="
-                        + "Eliminar('" + control.Base.rs.getString(1) + "','" + control.Base.rs.getString(2) + "');><img src='Imagenes/cancel.png'"
+                        + "width='18px'></a><a href='javascript:;' class='btn btn-danger btn-small' "
+                        + "onclick=\"Eliminar('" + control.Base.rs.getString(1) + "','" + control.Base.rs.getString(2) + "')\";><img src='Imagenes/cancel.png'"
                         + " width='18px'></a></td>"
                         + "</tr>");
             }

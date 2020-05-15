@@ -36,7 +36,8 @@
         <!--[if lt IE 9]> <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     </head>
     <body>
-        <% control.BarraPrincipal(out); control.BarradeMenu(out); %>            
+        <% control.BarraPrincipal(out);
+            control.BarradeMenu(out); %>            
         <!--<div class="main" style="margin-bottom:10px;"> -->
         <div class="main-inner">
             <div class="container">
@@ -69,7 +70,7 @@
         <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header" style="background-color:#85929E">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" 
-                 style="color:red; background-color: blue" id="Cierre">
+                        style="color:red; background-color: blue" id="Cierre">
                     X
                 </button>
                 <h3 id="myModalLabel" style="color: #922B21;">Mentenimiento de Productos</h3>
@@ -86,21 +87,21 @@
                         <tr>
                             <td style="color: blue"><b>Tipo Producto :</b></td>
                             <td>
-                                 <%
-                                  control.llenarComboweb("select * from tipoproducto",
-                                  "cbtprd",out,2);
-                                 %>                                                                    
+                                <%
+                                    control.llenarComboweb("select * from tipoproducto",
+                                            "cbtprd", out, 2);
+                                %>                                                                    
                             </td>
                         </tr>
                         <tr>
                             <td style="color: blue"><b>Marca :</b></td>
                             <td>
-                             <select class='mdb-select md-form' name='"+nmcb+"' id='cbmrc'></select>
-                             <a href="#myModal1" role="button" class="btn btn-danger" data-toggle="modal" 
-                              style="margin-bottom:5px;" id="btnmodal">
-                                 <img src="Imagenes/Add.png" width="50%"> 
-                             </a>
-                              
+                                <select class='mdb-select md-form' name='"+nmcb+"' id='cbmrc'></select>
+                                <a href="#myModal1" role="button" class="btn btn-danger" data-toggle="modal" 
+                                   style="margin-bottom:5px;" id="btnmodal">
+                                    <img src="Imagenes/Add.png" width="50%"> 
+                                </a>
+
                             </td>
                         </tr>
                         <tr>
@@ -109,14 +110,14 @@
                             </td>
                         </tr>
                         <tr>
-                          <td style="color: blue"><b>St_Minimo :</b></td>
-                          <td><input type="text" id="txtstkmin" name="txtstkmin" value="" placeholder="" class="span3" maxlength="3"/>                            
-                          </td>                          
+                            <td style="color: blue"><b>St_Minimo :</b></td>
+                            <td><input type="text" id="txtstkmin" name="txtstkmin" value="" placeholder="" class="span3" maxlength="3"/>                            
+                            </td>                          
                         </tr>
                         <tr>
-                        <td style="color: blue"><b>St_Máximo:</b></td>
-                          <td><input type="text" id="txtstkmax" name="txtstkmax" value="" placeholder="" class="span3" maxlength="3"/>                            
-                          </td>
+                            <td style="color: blue"><b>St_Máximo:</b></td>
+                            <td><input type="text" id="txtstkmax" name="txtstkmax" value="" placeholder="" class="span3" maxlength="3"/>                            
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -128,7 +129,7 @@
             </div>
         </div>
         <!--*****************************************FORMULARIO MODAL DE PRODUCTOS**************************-->
-        
+
         <!--*****************************************FORMULARIO MODAL DE MARCAS**************************-->
         <div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header" style="background-color:#85929E">
@@ -155,7 +156,7 @@
             </div>
         </div>
         <!--*****************************************FORMULARIO MODAL DE MARCAS**************************-->
-        
+
         <!-- Le javascript ================================================== --> 
         <!-- Placed at the end of the document so the pages load faster --> 
         <script src="js/jquery-1.7.2.min.js"></script>        
@@ -164,173 +165,189 @@
         <script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script> 
         <script src="js/base.js"></script> <script src="dist/sweetalert-dev.js"></script>
         <script type="text/javascript" language="javascript" src="media/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" language="javascript" src="js/funcionesComunes.js"></script>
 
-   <script>
-    $(document).ready(function () {
-      var bus = $("#busprod").val();$("#btnEditar").hide();Mostrar("","");
-      LlenarMarcas();
-      $("#busprod").keyup(function (e) {Mostrar("",$(this).val());});        
-      $("#btnGuardar1").click(function () {
-           mr = $("#txtmrc1").val();
-           $.ajax({url: "Procesador.jsp", type: 'POST',
-            data: "ev=3" + "&mrc=" + mr,
-            success: function (msg) {
-             if (msg.trim() === "correcto") {            
-              LlenarMarcas();$('#txtmrc1').val("");
-              $('#idmrc1').val("");
-             }
-             else {swal("Aviso!", msg.trim(), "success");}
-             $('#txtmrc').val("");  
-            }, error: function (xml, msg) {}                                                        
-           });
-          });
-      $("#btnGuardar").click(function () {
-           des=$("#txtprd").val();idtppr=parseInt($("#cbtprd").val());   
-           idmr = parseInt($("#cbmrc").val());pre =parseFloat($("#txtprc").val());
-           stmi = parseInt($("#txtstkmin").val());stma = parseInt($("#txtstkmax").val());           
-           $.ajax({url: "Procesador.jsp", type: 'POST',
-            data: "ev=8" + "&id=0" + "&idtppr="+idtppr+"&idmr="+idmr+"&des="+des+
-                  "&pre="+pre+"&stmi="+stmi+"&stma="+stma,
-            success: function (msg) {
-             if (msg.trim() === "correcto") {$('#txtprd').val("");                            
-              $("#txtprc").val("");$("#txtstkmin").val("");$("#txtstkmax").val("");   
-              $("#cbtprd option[value=-1]").attr("selected",true);
-              $("#cbmrc option[value=-1]").attr("selected",true);              
-              Mostrar("","");swal("Aviso!", "Lo Grabo", "success");                                                                                                                                
-             }
-             else {swal("Aviso!", msg.trim(), "success");}
-            }, error: function (xml, msg) {}                                                        
-           });
-          });        
-      $('#btnCerrar').click(function(){
-          if($('#txtprd').val().trim().length>0)  
-           limipiarSeleccion();            
-        });  
-      $('#Cierre').click(function(){
-          if($('#txtprd').val().trim().length>0)  
-           limipiarSeleccion();            
-        });
-      $('#btnEditar').click(function(){            
-         if($("#txtstkmax").val().trim().length>0){     
-          idpd=$('#idprd').val();prd=$('#txtprd').val();idtpoprd=$('#cbtprd').val();   
-          idmrc=$('#cbmrc').val();pre=$('#txtprc').val();stmn=$('#txtstkmin').val();
-          stmx=$('#txtstkmax').val();
-          $.ajax({
-           url: "Procesador.jsp",type: 'POST',data: "ev=10"+"&idpd="+idpd+"&prd="
-           +prd+"&idtpoprd="+idtpoprd+"&idmrc="+idmrc+"&pre="+pre+"&stmn="+stmn
-           +"&stmx="+stmx,
-           success: function (data) {
-            if(data.trim()==="Editado"){                           
-              swal("Editado","info");  
-             limipiarSeleccion();                
+        <script>
+            $(document).ready(function () {
+                var bus = $("#busprod").val();
+                $("#btnEditar").hide();
+                Mostrar("", "");
+                LlenarMarcas();
+                $("#busprod").keyup(function (e) {
+                    Mostrar("", $(this).val());
+                });
+                $("#btnGuardar1").click(function () {
+                    mr = $("#txtmrc1").val();
+                    $.ajax({url: "Procesador.jsp", type: 'POST',
+                        data: "ev=3" + "&mrc=" + mr,
+                        success: function (msg) {
+                            if (msg.trim() === "correcto") {
+                                LlenarMarcas();
+                                $('#txtmrc1').val("");
+                                $('#idmrc1').val("");
+                            } else {
+                                swal("Aviso!", msg.trim(), "success");
+                            }
+                            $('#txtmrc').val("");
+                        }, error: function (xml, msg) {}
+                    });
+                });
+                $("#btnGuardar").click(function () {
+                    des = $("#txtprd").val();
+                    idtppr = parseInt($("#cbtprd").val());
+                    idmr = parseInt($("#cbmrc").val());
+                    pre = parseFloat($("#txtprc").val());
+                    stmi = parseInt($("#txtstkmin").val());
+                    stma = parseInt($("#txtstkmax").val());
+                    $.ajax({url: "Procesador.jsp", type: 'POST',
+                        data: "ev=8" + "&id=0" + "&idtppr=" + idtppr + "&idmr=" + idmr + "&des=" + des +
+                                "&pre=" + pre + "&stmi=" + stmi + "&stma=" + stma,
+                        success: function (msg) {
+                            if (msg.trim() === "correcto") {
+                                $('#txtprd').val("");
+                                $("#txtprc").val("");
+                                $("#txtstkmin").val("");
+                                $("#txtstkmax").val("");
+                                $("#cbtprd option[value=-1]").attr("selected", true);
+                                $("#cbmrc option[value=-1]").attr("selected", true);
+                                Mostrar("", "");
+                                swal("Aviso!", "Lo Grabo", "success");
+                            } else {
+                                swal("Aviso!", msg.trim(), "success");
+                            }
+                        }, error: function (xml, msg) {}
+                    });
+                });
+                $('#btnCerrar').click(function () {
+                    if ($('#txtprd').val().trim().length > 0)
+                        limipiarSeleccion();
+                });
+                $('#Cierre').click(function () {
+                    if ($('#txtprd').val().trim().length > 0)
+                        limipiarSeleccion();
+                });
+                $('#btnEditar').click(function () {
+                    if ($("#txtstkmax").val().trim().length > 0) {
+                        idpd = $('#idprd').val();
+                        prd = $('#txtprd').val();
+                        idtpoprd = $('#cbtprd').val();
+                        idmrc = $('#cbmrc').val();
+                        pre = $('#txtprc').val();
+                        stmn = $('#txtstkmin').val();
+                        stmx = $('#txtstkmax').val();
+                        $.ajax({
+                            url: "Procesador.jsp", type: 'POST', data: "ev=10" + "&idpd=" + idpd + "&prd="
+                                    + prd + "&idtpoprd=" + idtpoprd + "&idmrc=" + idmrc + "&pre=" + pre + "&stmn=" + stmn
+                                    + "&stmx=" + stmx,
+                            success: function (data) {
+                                if (data.trim() === "Editado") {
+                                    swal("Editado", "info");
+                                    limipiarSeleccion();
+                                } else {
+                                    swal(data.trim());
+                                }
+                            },
+                            error: function (xml, msg) {}
+                        });
+                    } else {
+                        swal("Aviso", "Faltan datos", "info");
+                        $('#txtmrc').focus();
+                    }
+                    $('#txtmrc').val("");
+                    $('#btnEditar').hide();
+                    $("#myModal").hide();
+                });
+                ordtabla('tabla1');
+            });
+
+            function limipiarSeleccion() {
+                $("#btnGuardar").show();
+                $("#btnEditar").hide();
+                $("#txtprd").val("");
+                $("#txtprd").val("");
+                $("#txtprc").val("");
+                $("#txtstkmin").val("");
+                $("#txtstkmax").val("");
+                DesmarcarCombos();
+                $("#myModalLabel").text("Nuevo Producto:");
+                Mostrar("", "");
             }
-            else{swal(data.trim());}            
-           },
-           error:function(xml,msg){}
-          });
-         }
-         else{
-          swal("Aviso","Faltan datos","info");    
-          $('#txtmrc').focus();
-         }
-         $('#txtmrc').val("");$('#btnEditar').hide();$("#myModal").hide(); 
-        });
-      ordtabla('tabla1');
-    });
-       
-    function soloNumeros(e) {
-        var key = window.Event ? e.which : e.keyCode
-        return ((key >= 48 && key <= 57) || (key == 8) || (key == 35) || (key == 34) || (key == 46));
-       }
-    function limipiarSeleccion(){
-     $("#btnGuardar").show();$("#btnEditar").hide();
-     $("#txtprd").val("");$("#txtprd").val("");
-     $("#txtprc").val("");$("#txtstkmin").val("");$("#txtstkmax").val("");                       
-     DesmarcarCombos();$("#myModalLabel").text("Nuevo Producto:");Mostrar("","");    
-    }
-    function ordtabla(tab) {
-        $('#' + tab).dataTable({
-         "language": {"sProcessing": "Procesando...", "sLengthMenu": "Mostrar _MENU_ Registros",
-         "sZeroRecords": "No se encontraron resultados", "sEmptyTable": "Ningún dato disponible en esta tabla",
-         "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-         "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-         "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-         "sInfoPostFix": "", "sSearch": "Buscar:", "sUrl": "",
-         "sInfoThousands": ",", "sLoadingRecords": "Cargando...",
-         "oPaginate": {"sFirst": "Primero", "sLast": "Último", "sNext": "Siguiente",
-          "sPrevious": "Anterior"
-         },
-         "oAria": {
-         "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-         }
-        }
-       });
-       $('#' + tab).DataTable();
-      }    
-    function EliminarProducto(id,mr){              
-       swal({title:"Confirmar",text:"Se eliminara la marca "+mr,
-       type:"warning",showCancelButton:true,confirmButtonColor: "#DD6B55",
-       confirmButtonText: "Eliminar",
-       closeOnConfirm: false},function(){
-       $.ajax({
-        url: "Procesador.jsp",type: 'POST',
-        data: "ev=6"+"&idmr="+id+"&mrc="+mr,
-        success: function (data) {
-         if(data.trim()==="Eliminado"){
-           Mostrar("","");swal("Se Elimino correctamente","Info");
-         }
-         else{swal("Editado",data.trim(),"Info");}
-        },
-        error:function(xml,msg){}
-       });
-     });  
-    }           
-    function Mostrar(id,dt){
-      var id="";
-      $.ajax({url: "Procesador.jsp", type: 'POST',
-       data: "ev=7" + "&idpr=" + id + "&prd="+dt,
-       success: function (msg) {
-        $("#data1").html(msg);ordtabla('tabla1');
-        $(".dataTables_filter").hide();
-       },
-       error: function (xml, msg) {
-        swal("Aviso",msg.trim(),"info")   
-       }
-      });  
-    }
-    function DesmarcarCombos(){
-     document.getElementById('cbtprd').selectedIndex=-1;
-     document.getElementById('cbmrc').selectedIndex=-1;   
-    }
-    function SeleccionarProducto(id){        
-     $('#idprd').val(id);LlenarMarcas();     
-     $.ajax({url: "Procesador.jsp",type: 'POST',data: "ev=9" + "&idpr="+id,
-         dataType: 'json',
-          success: function (data) {
-            $("#txtpr").val(data.idpr);             
-            $("#btnGuardar").hide();$("#btnEditar").show();$("#txtprd").val(data.nompr);           
-            $("#cbtprd option[value="+ parseInt(data.idtpp) +"]").attr("selected",true);
-            $("#cbmrc option[value="+ parseInt(data.idmr) +"]").attr("selected",true);     
-            
-            $("#txtprc").val(data.prc);$("#txtstkmin").val(data.stmi);
-            $("#txtstkmax").val(data.stma);             
-            $("#myModalLabel").text("Editar al Producto:");$('#myModal').modal('show');                                                                        
-           }, error: function (xml, msg) {}                                                                    
-         });
-    }
-    function LlenarMarcas(){    
-     $("#cbmrc").empty();     
-     $.ajax({
-      url: "Procesador.jsp",type: 'POST',data: "ev=11",dataType: 'json',
-      success: function (datos) {              
-       for(f=0;datos.length;f++){
-        $('#cbmrc').append($('<option>',{value: datos[f].idmr,text : datos[f].mrc}));        
-       }              
-      },
-      error: function (xml,msg) {swal(msg.trim());}      
-     });            
-   }
-  </script>
+            function EliminarProducto(id, mr) {
+                swal({title: "Confirmar", text: "Se eliminara el producto " + mr,
+                    type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Eliminar",
+                    closeOnConfirm: false}, function () {
+                    $.ajax({
+                        url: "Procesador.jsp", type: 'POST',
+                        data: "ev=16" + "&id=" + id + "&des=" + mr,
+                        success: function (data) {
+                            if (data.trim() === "Eliminado") {
+                                Mostrar("", "");
+                                swal("Se Elimino correctamente", "Info");
+                            } else {
+                                swal("Error", data.trim(), "Info");
+                            }
+                        },
+                        error: function (xml, msg) {}
+                    });
+                });
+            }
+            function Mostrar(id, dt) {
+                var id = "";
+                $.ajax({url: "Procesador.jsp", type: 'POST',
+                    data: "ev=7" + "&idpr=" + id + "&prd=" + dt,
+                    success: function (msg) {
+                        $("#data1").html(msg);
+                        ordtabla('tabla1');
+                        $(".dataTables_filter").hide();
+                    },
+                    error: function (xml, msg) {
+                        swal("Aviso", msg.trim(), "info")
+                    }
+                });
+            }
+            function DesmarcarCombos() {
+                desmarcarCombo('cbtprd');
+                desmarcarCombo('cbmrc');
+            }
+            function SeleccionarProducto(id) {
+                $('#idprd').val(id);
+                LlenarMarcas();
+                $.ajax({url: "Procesador.jsp", type: 'POST', data: "ev=9" + "&idpr=" + id,
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#txtpr").val(data.idpr);
+                        $("#btnGuardar").hide();
+                        $("#btnEditar").show();
+                        $("#txtprd").val(data.nompr);
+                        $("#cbtprd option[value=" + parseInt(data.idtpp) + "]").attr("selected", true);
+                        $("#cbmrc option[value=" + parseInt(data.idmr) + "]").attr("selected", true);
+
+                        $("#txtprc").val(data.prc);
+                        $("#txtstkmin").val(data.stmi);
+                        $("#txtstkmax").val(data.stma);
+                        $("#myModalLabel").text("Editar al Producto:");
+                        $('#myModal').modal('show');
+                    }, error: function (xml, msg) {}
+                });
+            }
+            function LlenarMarcas() {
+                $("#cbmrc").empty();
+                $.ajax({
+                    url: "Procesador.jsp", type: 'POST', data: "ev=11", dataType: 'json',
+                    success: function (datos) {
+                        datos.forEach(dato => {
+                            $('#cbmrc').append($('<option>', {value: dato.idmr, text: dato.mrc}));
+                        })
+//                        for (f = 0; datos.length; f++) {
+//                            $('#cbmrc').append($('<option>', {value: datos[f].idmr, text: datos[f].mrc}));
+//                        }
+                    },
+                    error: function (xml, msg) {
+                        swal(msg.trim());
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

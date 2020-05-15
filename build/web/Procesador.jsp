@@ -117,8 +117,8 @@
                         + "</td><td style='text-align:center; font-size:14px;'>" + control.Base.rs.getString(5)
                         + "</td><td class='td-actions'><a href='javascript:;' class='btn btn-small' "
                         + " onclick='SeleccionarProducto(" + control.Base.rs.getString(1) + ")'> <img src='Imagenes/Edit.png' "
-                        + "width='18px'></a><a href='javascript:;' class='btn btn-danger btn-small' onclick="
-                        + "EliminarProdcuto(" + prod.trim() + ");><img src='Imagenes/cancel.png'"
+                        + "width='18px'></a><a href='javascript:;' class='btn btn-danger btn-small'"
+                                + " onclick=\"EliminarProducto('" + control.Base.rs.getString(1) + "','" + control.Base.rs.getString(2) + "')\";><img src='Imagenes/cancel.png'"
                         + " width='18px'></a></td></tr>");
             }
             out.println("</tbody></table></div></div>");
@@ -256,6 +256,13 @@
                 }
             } catch (Exception e) {
             }
+            break;
+        }
+        case 16: { //Eliminar Producto                
+            Producto prod = new Producto(Integer.parseInt(request.getParameter("id")),
+                        0, 0, request.getParameter("des"), 0.0, 0, 0);
+
+            out.print(prod.EliminarProducto());
             break;
         }
 
