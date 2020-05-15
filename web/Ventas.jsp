@@ -63,7 +63,7 @@
                                     <input type="text" id="cliente"/>
                                 </div>
                             </div>
-                            
+
                             <div class="card">
                                 <div class="card-body">
                                     <label> Comprobante</label>
@@ -89,7 +89,7 @@
                                     </datalist>
                                     <label>Cantidad</label>
                                     <input type="number" id="cant"/>
-                                    <label>Precio</label>
+                                    <label>Precio (Precione enter para añadir a tabla)</label>
                                     <input type="number" id="prec"/>
                                 </div>
                             </div>
@@ -132,19 +132,39 @@
         <script type="text/javascript" language="javascript" src="js/funcionesComunes.js"></script>
 
         <script>
+
+
             $(document).ready(function () {
                 var productos = [];
-
+                llenarProductos();
+                $("#ident").keyup(() => {
+                    if ($("#ident").val().length === 11 || $("#ident").val().length === 8) {
+                        buscarCliente();
+                    } else {
+                        $("#cliente").val('');
+                    }
+                });
                 $("#prec").keypress(function (e) {
                     if (e.which === 13) {
                         nuevoProducto();
                         llenarTabla();
                     }
                 });
-
                 $("#comprar").click(() => {
-
+                    comprarProducto();
                 });
+
+                function llenarProductos() {
+                    $.ajax({
+                        url: "Procesador3.jsp",
+                        type: 'POST',
+                        data: "ev=4",
+                        success: function (msg) {
+                            $('#lista').html(msg);
+                        },
+                        error: function (xml, msg) {}
+                    });
+                }
 
                 function nuevoProducto() {
                     productos.push({
@@ -158,21 +178,16 @@
 
                     td1 = document.createElement('td')
                     td1.appendChild(document.createTextNode(producto.producto));
-
                     td2 = document.createElement('td')
                     td2.appendChild(document.createTextNode(producto.cantidad));
-
                     td3 = document.createElement('td')
                     td3.appendChild(document.createTextNode(producto.precio));
-
                     td4 = document.createElement('td')
                     td4.appendChild(document.createTextNode(producto.cantidad * producto.precio));
-
                     fila.appendChild(td1);
                     fila.appendChild(td2);
                     fila.appendChild(td3);
                     fila.appendChild(td4);
-
                     document.getElementById('body').appendChild(fila)
 
                 }
@@ -183,189 +198,69 @@
                     });
                 }
 
-function comprarProducto(){
-    
-}
+                function comprarProducto() {
 
-                var bus = $("#busprod").val();
-                $("#btnEditar").hide();
-                Mostrar("", "");
-                LlenarMarcas();
-                $("#busprod").keyup(function (e) {
-                    Mostrar("", $(this).val());
-                });
-                $("#btnGuardar1").click(function () {
-                    mr = $("#txtmrc1").val();
-                    $.ajax({url: "Procesador.jsp", type: 'POST',
-                        data: "ev=3" + "&mrc=" + mr,
+                    let ident = $("#ident").val();
+                    let comp = $("#comp").children("option:selected").text();
+                    let mod = $("#mod").children("option:selected").text();
+
+                    $.ajax({url: "Procesador3.jsp", type: 'POST',
+                        data: "ev=1" + "&tipo=" + comp + "&mod=" + mod + "&ident=" + ident,
                         success: function (msg) {
-                            if (msg.trim() === "correcto") {
-                                LlenarMarcas();
-                                $('#txtmrc1').val("");
-                                $('#idmrc1').val("");
-                            } else {
-                                swal("Aviso!", msg.trim(), "success");
-                            }
-                            $('#txtmrc').val("");
+                            productos.forEach(prod => {
+                                $.ajax({url: "Procesador3.jsp", type: 'POST',
+                                    data: "ev=2" + "&prod=" + prod.producto + "&precio=" + prod.precio
+                                            + "&cant=" + prod.cantidad + "&idcomp=" + msg,
+                                    success: function (msg) {
+                                        console.log(msg);
+                                    }, error: function (xml, msg) {}
+                                });
+                            });
+                            
+                            window.open("comprobante.jsp"); 
+
                         }, error: function (xml, msg) {}
                     });
-                });
-                $("#btnGuardar").click(function () {
-                    des = $("#txtprd").val();
-                    idtppr = parseInt($("#cbtprd").val());
-                    idmr = parseInt($("#cbmrc").val());
-                    pre = parseFloat($("#txtprc").val());
-                    stmi = parseInt($("#txtstkmin").val());
-                    stma = parseInt($("#txtstkmax").val());
-                    $.ajax({url: "Procesador.jsp", type: 'POST',
-                        data: "ev=8" + "&id=0" + "&idtppr=" + idtppr + "&idmr=" + idmr + "&des=" + des +
-                                "&pre=" + pre + "&stmi=" + stmi + "&stma=" + stma,
+
+                }
+
+                function crearComprobante() {
+                    let ident = $("#ident").val();
+                    let comp = $("#comp").children("option:selected").text();
+                    let mod = $("#mod").children("option:selected").text();
+                    let idComp;
+                    $.ajax({url: "Procesador3.jsp", type: 'POST',
+                        data: "ev=1" + "&tipo=" + comp + "&mod=" + mod + "&ident=" + ident,
                         success: function (msg) {
-                            if (msg.trim() === "correcto") {
-                                $('#txtprd').val("");
-                                $("#txtprc").val("");
-                                $("#txtstkmin").val("");
-                                $("#txtstkmax").val("");
-                                $("#cbtprd option[value=-1]").attr("selected", true);
-                                $("#cbmrc option[value=-1]").attr("selected", true);
-                                Mostrar("", "");
-                                swal("Aviso!", "Lo Grabo", "success");
-                            } else {
-                                swal("Aviso!", msg.trim(), "success");
-                            }
+                            return msg;
                         }, error: function (xml, msg) {}
                     });
-                });
-                $('#btnCerrar').click(function () {
-                    if ($('#txtprd').val().trim().length > 0)
-                        limipiarSeleccion();
-                });
-                $('#Cierre').click(function () {
-                    if ($('#txtprd').val().trim().length > 0)
-                        limipiarSeleccion();
-                });
-                $('#btnEditar').click(function () {
-                    if ($("#txtstkmax").val().trim().length > 0) {
-                        idpd = $('#idprd').val();
-                        prd = $('#txtprd').val();
-                        idtpoprd = $('#cbtprd').val();
-                        idmrc = $('#cbmrc').val();
-                        pre = $('#txtprc').val();
-                        stmn = $('#txtstkmin').val();
-                        stmx = $('#txtstkmax').val();
-                        $.ajax({
-                            url: "Procesador.jsp", type: 'POST', data: "ev=10" + "&idpd=" + idpd + "&prd="
-                                    + prd + "&idtpoprd=" + idtpoprd + "&idmrc=" + idmrc + "&pre=" + pre + "&stmn=" + stmn
-                                    + "&stmx=" + stmx,
-                            success: function (data) {
-                                if (data.trim() === "Editado") {
-                                    swal("Editado", "info");
-                                    limipiarSeleccion();
-                                } else {
-                                    swal(data.trim());
-                                }
-                            },
-                            error: function (xml, msg) {}
-                        });
-                    } else {
-                        swal("Aviso", "Faltan datos", "info");
-                        $('#txtmrc').focus();
-                    }
-                    $('#txtmrc').val("");
-                    $('#btnEditar').hide();
-                    $("#myModal").hide();
-                });
-                ordtabla('tabla1');
+                    return idComp;
+                }
+
+                function buscarCliente() {
+                    let dni = $("#ident").val();
+                    $.ajax({url: "Procesador3.jsp", type: 'POST',
+                        data: "ev=3" + "&ident=" + dni,
+                        success: function (msg) {
+                            $('#cliente').val(msg);
+                        }, error: function (xml, msg) {}
+                    });
+                }
+
+
+
+
             });
 
-            function limipiarSeleccion() {
-                $("#btnGuardar").show();
-                $("#btnEditar").hide();
-                $("#txtprd").val("");
-                $("#txtprd").val("");
-                $("#txtprc").val("");
-                $("#txtstkmin").val("");
-                $("#txtstkmax").val("");
-                DesmarcarCombos();
-                $("#myModalLabel").text("Nuevo Producto:");
-                Mostrar("", "");
-            }
-            function EliminarProducto(id, mr) {
-                swal({title: "Confirmar", text: "Se eliminara el producto " + mr,
-                    type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Eliminar",
-                    closeOnConfirm: false}, function () {
-                    $.ajax({
-                        url: "Procesador.jsp", type: 'POST',
-                        data: "ev=16" + "&id=" + id + "&des=" + mr,
-                        success: function (data) {
-                            if (data.trim() === "Eliminado") {
-                                Mostrar("", "");
-                                swal("Se Elimino correctamente", "Info");
-                            } else {
-                                swal("Error", data.trim(), "Info");
-                            }
-                        },
-                        error: function (xml, msg) {}
-                    });
-                });
-            }
-            function Mostrar(id, dt) {
-                var id = "";
-                $.ajax({url: "Procesador.jsp", type: 'POST',
-                    data: "ev=7" + "&idpr=" + id + "&prd=" + dt,
-                    success: function (msg) {
-                        $("#data1").html(msg);
-                        ordtabla('tabla1');
-                        $(".dataTables_filter").hide();
-                    },
-                    error: function (xml, msg) {
-                        swal("Aviso", msg.trim(), "info")
-                    }
-                });
-            }
-            function DesmarcarCombos() {
-                desmarcarCombo('cbtprd');
-                desmarcarCombo('cbmrc');
-            }
-            function SeleccionarProducto(id) {
-                $('#idprd').val(id);
-                LlenarMarcas();
-                $.ajax({url: "Procesador.jsp", type: 'POST', data: "ev=9" + "&idpr=" + id,
-                    dataType: 'json',
-                    success: function (data) {
-                        $("#txtpr").val(data.idpr);
-                        $("#btnGuardar").hide();
-                        $("#btnEditar").show();
-                        $("#txtprd").val(data.nompr);
-                        $("#cbtprd option[value=" + parseInt(data.idtpp) + "]").attr("selected", true);
-                        $("#cbmrc option[value=" + parseInt(data.idmr) + "]").attr("selected", true);
 
-                        $("#txtprc").val(data.prc);
-                        $("#txtstkmin").val(data.stmi);
-                        $("#txtstkmax").val(data.stma);
-                        $("#myModalLabel").text("Editar al Producto:");
-                        $('#myModal').modal('show');
-                    }, error: function (xml, msg) {}
-                });
-            }
-            function LlenarMarcas() {
-                $("#cbmrc").empty();
-                $.ajax({
-                    url: "Procesador.jsp", type: 'POST', data: "ev=11", dataType: 'json',
-                    success: function (datos) {
-                        datos.forEach(dato => {
-                            $('#cbmrc').append($('<option>', {value: dato.idmr, text: dato.mrc}));
-                        })
-//                        for (f = 0; datos.length; f++) {
-//                            $('#cbmrc').append($('<option>', {value: datos[f].idmr, text: datos[f].mrc}));
-//                        }
-                    },
-                    error: function (xml, msg) {
-                        swal(msg.trim());
-                    }
-                });
-            }
+
+
+
+
+
+
+
         </script>
     </body>
 </html>

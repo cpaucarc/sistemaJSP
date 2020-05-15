@@ -17,6 +17,8 @@ public class Controlador {
  public static String dtogeneral="";public IMPRIMIR impresor=new IMPRIMIR();
  public Conexion Base=new Conexion();public static int cta=0;
  public static String dateando="";
+ 
+ public static String _idc = "9";
  /**********************************ATRIBUTOS*******************************************/   
  
  /***************************************METODOS****************************************/    
@@ -296,4 +298,16 @@ public class Controlador {
         return rst;
     }
  /**********************************METODOS*************************************/   
+
+    public String crearComprobante(String tipo, String mod, String ident){
+        String sql = "select id from comprobante order by id desc limit 1;";
+        CrearRegistro("insert into comprobante values (null, '"+tipo+"', '"+mod+"', "
+                + "curdate(), curtime(), 1, (select id from cliente where ident = '"+ident+"'));");
+        
+        return DevolverRegistroDto(sql, 1);
+    }
+
+    public String obtenerCliente(String dni){
+        return DevolverRegistroDto("select nombre from cliente where ident = '"+dni+"'", 1);
+    }
 }
