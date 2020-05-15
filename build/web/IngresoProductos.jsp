@@ -36,6 +36,20 @@
                 }
             }
             .cltxtos{font-weight: bold;color: blue;}
+            .table th, .table td{
+                padding: 5px;
+            }
+            .card{
+                border: 1px solid #D5D5D5;
+                background-color: #FFF;
+                border-radius: 5px;
+            }
+            .card-body{
+                padding: 10px;
+            }
+            #guardar{
+                margin-right: 0;
+            }
         </style>
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -98,14 +112,12 @@
                             </div>
                         </div>                                
                     </div>                            
-                </div>                        
-            </div> 
+                </div> 
 
-            <div class="container my-2">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
+                        <table class="table text-center table-striped">
+                            <thead class="thead-dark">
                             <th>Producto</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
@@ -113,10 +125,12 @@
                             <tbody id="body"></tbody>
                         </table>
 
-                        <button class="btn btn-primary" id="guardar">Guardar</button>
+                        <button class="btn btn-primary btn-block" id="guardar">Guardar</button>
                     </div>
                 </div>
-            </div>                   
+
+            </div> 
+
         </div>
         <br>
         <br>
@@ -162,8 +176,7 @@
                 });
 
                 $("#tx3").keypress(function (e) {
-                    if (e.which == 13) {
-//             swal('Aviso','Presionaste '.concat($("#tx3").val().toString()),'success');
+                    if (e.which === 13) {
                         agregarTabla();
                         limpiar();
                     }
@@ -172,15 +185,15 @@
 
 
                 $("#guardar").click(() => {
-                    if( $("#rucprov").val().length !== 11 ){
-                        swal('Aviso','Falta los datos del proveedor','error');
+                    if ($("#rucprov").val().length !== 11) {
+                        swal('Aviso', 'Falta los datos del proveedor', 'error');
                         $("#rucprov").focus();
-                    }else{                        
-                        swal('Aviso','Los datos se guardaron correctamente ','success');
+                    } else {
+                        swal('Aviso', 'Los datos se guardaron correctamente ', 'success');
                         $("#body").empty();
                         limpiar();
                     }
-                    
+
                 });
 
 
@@ -206,7 +219,7 @@
 
                 document.getElementById('body').appendChild(fila);
             }
-            function limpiar(){
+            function limpiar() {
                 $('#tx1').val('');
                 $('#tx2').val('');
                 $('#tx3').val('');

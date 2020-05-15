@@ -138,7 +138,8 @@ public class Controlador {
         + "='_blank' class='dropdown-toggle' data-toggle='dropdown'><br><img src='Imagenes/Clientes.png'>"
         + "<span>Procesos</span></a><ul class='dropdown-menu' style='background-color: #a6e1ec'>"
         + "<li style='color: red'><a href='IngresoProductos.jsp'> Ingreso Productos</a></li><li><a href='#'>Venta "
-        + "de Producto</a></li><li><a href='#'>Anular Comprobantes</a></li></ul></li>" 
+        + "de Producto</a></li><li><a href='#'>Anular Comprobantes</a></li>"
+             + "<li><a href='Ventas.jsp'>Ventas</a></li></ul></li>" 
                           
         + "<li class='dropdown active'><a href='javascript:;' class='dropdown-toggle' "
         + "data-toggle='dropdown'><br><img src='Imagenes/Print.png'><span>Los Reportes</span>"
