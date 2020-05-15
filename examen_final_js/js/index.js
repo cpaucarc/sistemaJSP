@@ -18,7 +18,9 @@ var precios = [120, 130, 100, 150, 150]
 
 // Eventos
 
-
+window.onload = () => {
+    limpiarFormulario()
+}
 
 add.addEventListener('click', () => {
     nuevaFila()
@@ -28,6 +30,7 @@ curso.addEventListener('change', () => {
     costo.value = obtenerPrecio();
 })
 
+// Funciones
 
 function nuevaFila() {
     fila = document.createElement('tr')
@@ -62,4 +65,13 @@ function nuevaFila() {
 function obtenerPrecio() {
     valor = curso.options[curso.selectedIndex].value
     return precios[valor]
+}
+
+function limpiarFormulario() {
+    curso.selectedIndex = -1
+    genero.selectedIndex = -1
+    costo.value = ''
+    dni.value = ''
+    nombre.value = ''
+    apellido.value = ''
 }
