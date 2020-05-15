@@ -147,7 +147,8 @@ public class Controlador {
         + "data-toggle='dropdown'><br><img src='Imagenes/Print.png'><span>Los Reportes</span>"
         + "</a><ul class='dropdown-menu' style='background-color: #a6e1ec'><li style='color: "
         + "red'><a href='ReporMarcas.jsp' target=_blank> Reporte de Marcas</a></li><li><a href='#'>Reporte"
-        + " Tipo Producto</a></li><li><a href='ReporProductos.jsp' target=_blank>Reporte Producto</a></li></ul></li>"
+        + " Tipo Producto</a></li><li><a href='ReporProductos.jsp' target=_blank>Reporte Producto</a></li>"
+             + "<li><a href='todos_comp.jsp' target=_blank>Reporte Ventas con Subreporte</a></li></ul></li>"
       + "</ul>"
      + "</div></div></div>");
    }

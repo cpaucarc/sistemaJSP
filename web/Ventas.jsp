@@ -33,7 +33,8 @@
             }
             .card{
                 display: inline-block;
-                margin: 5px;
+                margin-left: 75px;
+                margin-bottom: 10px;
             }
             .venta{
                 width: 40%;
@@ -172,6 +173,7 @@
                         cantidad: $("#cant").val(),
                         precio: $("#prec").val()
                     });
+                    limpiar();
                 }
                 function crearFila(producto) {
                     fila = document.createElement('tr')
@@ -216,14 +218,23 @@
                                     }, error: function (xml, msg) {}
                                 });
                             });
-                            
-                            window.open("comprobante.jsp"); 
+
+                            window.open("comprobante.jsp");
+
+                            limpiar();
+                            $("#body").empty();
 
                         }, error: function (xml, msg) {}
                     });
 
                 }
 
+                function  limpiar() {
+                    $("#prod").val('');
+                    $("#prod").focus();
+                    $("#cant").val('');
+                    $("#prec").val('');
+                }
                 function crearComprobante() {
                     let ident = $("#ident").val();
                     let comp = $("#comp").children("option:selected").text();
