@@ -1,0 +1,17 @@
+body {
+    padding: 15px;
+    color: #1F2430;
+}
+
+h1 {
+    text-align: center;
+    color: #3390FF;
+    text-transform: uppercase;
+    text-decoration: underline #3390FFBB;
+}
+
+h2 {
+    color: #3390FF89;
+    font-size: x-large;
+    text-decoration: underline #3390FF55;
+}

@@ -1,0 +1,9 @@
+.form {
+    display: table;
+}
+
+.form-group {
+    width: 50%;
+    display: inline-block;
+    margin-bottom: 1rem;
+}

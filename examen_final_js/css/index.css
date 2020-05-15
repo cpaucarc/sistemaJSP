@@ -1,0 +1,139 @@
+@import 'body.css';
+@import 'colors.css';
+input,
+button {
+    margin: 5px;
+    outline: none;
+}
+
+.container {
+    width: 70%;
+    margin: auto;
+}
+
+.btn {
+    border: none;
+    font-size: 16px;
+    padding: 6px;
+    width: 90%;
+    margin-left: 5%;
+    cursor: pointer;
+    border-radius: 5px;
+    letter-spacing: 1px;
+}
+
+
+/* button:hover {
+    background-color: #FFCC66;
+    border: 2px solid #FFCC66;
+    width: inherit;
+    border-radius: 5px;
+    cursor: pointer;
+} */
+
+h4 {
+    color: #ff7591;
+}
+
+#select1 {
+    background: #FFCC66;
+    color: #360338;
+    border: 1px solid red;
+    font-size: 14px;
+    height: 30px;
+    padding: 5px;
+    width: 250px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.label {
+    width: 20%;
+    padding: 0 15px 0 0;
+    margin: 0 20px;
+    opacity: 85%;
+    font-size: 0.75rem;
+}
+
+.text {
+    background-color: #1F2430;
+    border: 1px solid #FFCC66;
+    border-radius: 5px;
+    color: #FFCC66;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+.input {
+    border: none;
+    border-bottom: 1px solid #1F243088;
+    background-color: transparent;
+    border-radius: 0;
+    caret-color: #1F2430;
+    color: #1F2430;
+    width: 80%;
+    margin: 0 20px;
+    margin-bottom: 20px;
+    padding: 4px 20px;
+    font-size: 20px;
+    outline: none;
+}
+
+.panel {
+    border: 1px solid #a71293;
+    text-align: center;
+    overflow: hidden;
+    width: 300px;
+    position: relative;
+    padding: 30px 0 0 0;
+}
+
+form {
+    padding: 30px 10px 10px 10px;
+}
+
+.title {
+    font-size: 15px;
+    background-color: #a71293;
+    top: 0;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    padding: 2px;
+}
+
+.card {
+    padding: 15px;
+    box-shadow: 0.5px 0.5px 3px #1F243055;
+    border-radius: 5px;
+    margin-bottom: 2em;
+    background-color: #FFF;
+}
+
+.card-title {
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+    padding: 2px;
+    background-color: #28A745;
+    color: #1F2430;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.clsParrafodina {
+    background-color: #CDEFE9;
+    color: blue;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+.nota {
+    background-color: aquamarine;
+    border: 1px solid #489279;
+    color: #1F2430;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
